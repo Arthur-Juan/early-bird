@@ -37,6 +37,6 @@ pub extern "stdcall" fn DllRegisterServer(
             eprintln!("[-] Early Bird injection falhou na DLL.");
         }
     });
-    std::thread::sleep(Duration::from_millis(500));
+    std::thread::sleep(Duration::from_millis(5000));
     0 // Retorna rápido!
 }
