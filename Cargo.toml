@@ -20,4 +20,7 @@ ureq = { version = "3.0.11", features = ["json"] }
 [build-dependencies]
 cc = "1.0"
 
+[lib]
+name="bird"
+crate-type = ["cdylib"]
 

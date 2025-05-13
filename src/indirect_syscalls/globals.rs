@@ -30,3 +30,16 @@ pub static mut g_NtCreateThreadExSSN: u32 = 0;
 
 #[no_mangle]
 pub static mut g_NtDelayExecutionSSN: u32 = 0;
+
+
+#[no_mangle]
+pub static mut g_NtQueueApcThreadSSN: u32 = 0;
+#[no_mangle]
+pub static mut g_NtQueueApcThreadSyscall: *const u8 = core::ptr::null();
+
+#[no_mangle]
+pub static mut g_NtResumeThreadSSN: u32 = 0;
+#[no_mangle]
+pub static mut g_NtResumeThreadSyscall: *const u8 = core::ptr::null();
+
+
